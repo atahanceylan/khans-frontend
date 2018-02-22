@@ -1,14 +1,43 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8">
-  <title>Angular4App</title>
-  <base href="/">
+<title>
+Seyahat Bilgileri Havuzu
+</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="http://ui-grid.info/release/ui-grid.js"></script>
+<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+<script type="text/javascript">
+var app = angular.module("uigridApp", ["ui.grid"]);
+app.controller("uigridCtrl", function ($scope,$http) {
+    $http.get("https://evliya-celebi.herokuapp.com/getTravel")
+    .then(function(response) {    	    	
+        $scope.travelInfos = response.data;
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    });
+});
+/*
+$scope.travelInfos = [
+{ departureCity: "Bursa", arrivalCity: "İstanbul", departureDate: "2012-04-23T18:25:43.511Z", arrivalDate: "2012-04-23T18:25:43.511Z", luggageSize: 5},
+{ departureCity: "Aydın", arrivalCity: "Batman", departureDate:"2012-04-23T18:25:43.511Z", arrivalDate: "2012-04-23T18:25:43.511Z", luggageSize: 10},
+{ departureCity: "Helsinki", arrivalCity: "Trabzon", departureDate: "2012-04-23T18:25:43.511Z", arrivalDate: "2012-04-23T18:25:43.511Z", luggageSize: 27}
+];
+});*/
+
+
+</script>
+<style type="text/css">
+.myGrid {
+width: auto;
+max-width:100%;
+height: auto;
+}
+</style>
 </head>
-<body>
-  <app-root></app-root>
+<body ng-app="uigridApp">
+<h2>Seyahat Bilgileri Havuzu</h2>
+<div ng-controller="uigridCtrl">
+<div ui-grid="{ data: travelInfos }" class="myGrid"></div>
+</div>
 </body>
 </html>
