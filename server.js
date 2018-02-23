@@ -10,6 +10,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+var port = process.env.PORT || 5000;
 
 
 // Serve only the static files form the dist directory
@@ -21,4 +22,4 @@ app.get('/*', function(req, res) {
 });
 
 // Start the app by listening on the default Heroku port
-app.listen(443);
+app.listen(port);
